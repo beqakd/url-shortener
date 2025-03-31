@@ -1,0 +1,11 @@
+model Url {
+    id    String @id @map("shorten_url")
+    title String @map("title")
+    url   String @map("url")
+    ttl   Int?   @map("ttl")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("urls")
+}
