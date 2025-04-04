@@ -1,8 +1,7 @@
 model Url {
-    id    String @id @map("shorten_url")
-    title String @map("title")
-    url   String @map("url")
-    ttl   Int?   @map("ttl")
+    id        String   @id @map("shorten_url")
+    url       String   @unique @map("url")
+    expiresAt DateTime @map("expires_at")
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
