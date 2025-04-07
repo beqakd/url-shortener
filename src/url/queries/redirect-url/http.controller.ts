@@ -6,7 +6,7 @@ import { Response } from 'express';
 
 @Controller(urlRoot)
 export class HttpController {
-  constructor(private readonly repository: UrlRepository) {}
+  constructor(private readonly redirectUrlService: RedirectUrl.Service) {}
 
   @Get(urlRoutes.get)
   @RedirectUrl.swaggerDocs()
@@ -14,7 +14,12 @@ export class HttpController {
     @Param() param: RedirectUrl.HttpBodyRequestDto,
     @Res() response: Response,
   ): Promise<RedirectUrl.HttpResponseDto> {
-    const url = await this.repository.findById(param.url);
+    const url = await this.redirectUrlService.execute(
+      new RedirectUrl.Command({
+        url: param.url,
+      }),
+    );
+
     const redirectedUrl = url.url;
 
     response.redirect(redirectedUrl);

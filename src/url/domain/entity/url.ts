@@ -7,7 +7,7 @@ import {
 
 export type UrlConstructor = Pick<
   NonFunctionProperties<Omit<Url, 'props'>>,
-  'id' | 'url' | 'expiresAt' | 'createdAt' | 'updatedAt'
+  'id' | 'url' | 'clicks' | 'expiresAt' | 'createdAt' | 'updatedAt'
 >;
 
 export class Url extends AggregateRoot {
@@ -24,7 +24,14 @@ export class Url extends AggregateRoot {
     Object.assign(this, props);
   }
 
-  shortenedUrl(): void {
+  get shortenedUrl(): string {
+    const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    const shortenedUrl = `${baseUrl}/${this.id}`;
+
+    return shortenedUrl;
+  }
+
+  shortenUrl(): void {
     if (this.isExpired()) {
       throw new Error('Url is expired');
     }
@@ -68,6 +75,7 @@ export class Url extends AggregateRoot {
     return {
       id: this.id,
       url: this.url,
+      clicks: this.clicks,
       expiresAt: this.expiresAt,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

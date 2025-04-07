@@ -29,3 +29,11 @@ export class UrlExpiredError extends Error {
     super(message);
   }
 }
+
+export class InvalidShortCode extends Error {
+  public readonly code = 'URL.INVALID_SHORT_CODE';
+
+  constructor(message: string) {
+    super(message);
+  }
+}

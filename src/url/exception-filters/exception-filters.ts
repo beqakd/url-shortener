@@ -1,6 +1,7 @@
 import { ArgumentsHost, NotFoundException } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import {
+  InvalidShortCode,
   UnableToCreateUrlError,
   UrlAlreadyExistsError,
   UrlExpiredError,
@@ -12,6 +13,7 @@ const errors = [
   UrlAlreadyExistsError,
   UnableToCreateUrlError,
   UrlExpiredError,
+  InvalidShortCode,
 ];
 
 type ErrorTypes = (typeof errors)[number];
@@ -31,6 +33,10 @@ export class UrlHttpExceptionsFilter extends BaseExceptionFilter {
     }
 
     if (exception instanceof UrlExpiredError) {
+      return super.catch(new NotFoundException(exception.message), host);
+    }
+
+    if (exception instanceof InvalidShortCode) {
       return super.catch(new NotFoundException(exception.message), host);
     }
 

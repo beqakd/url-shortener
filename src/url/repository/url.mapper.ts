@@ -8,7 +8,7 @@ export class UrlMapper {
       id: data.id,
       url: data.url,
       expiresAt: data.expiresAt.getTime(),
-
+      clicks: data.clicks,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
     });

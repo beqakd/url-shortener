@@ -26,10 +26,10 @@ export class Service {
       await this.repository.createUrl(cmd.url),
     );
 
-    url.shortenedUrl();
+    url.shortenUrl();
 
     url.commit();
 
-    return url.id;
+    return url.shortenedUrl;
   }
 }
