@@ -63,4 +63,23 @@ export class UrlRepository {
       }
     }
   }
+
+  async incrementClickCount(id: string): Promise<void> {
+    try {
+      await this.prismaService.url.update({
+        where: { id },
+        data: {
+          clicks: {
+            increment: 1,
+          },
+        },
+      });
+    } catch (e) {
+      if (e.code === 'P2025') {
+        throw new UrlNotFoundError(`Url with id ${id} not found`);
+      } else {
+        throw e;
+      }
+    }
+  }
 }

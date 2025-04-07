@@ -8,6 +8,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { URL_QUEUE } from './application/queue/utils';
 import { CleanExpiredUrlsService } from './application/queue/clean-expired.service';
 import { CleanExpiredUrlsProcessor } from './application/queue/clean-expired.processor';
+import { ClickCountIncreasedHandler } from './application/event-handlers/click-count-increased.event-handler';
 
 @Module({
   imports: [
@@ -31,6 +32,9 @@ import { CleanExpiredUrlsProcessor } from './application/queue/clean-expired.pro
     // Queue
     CleanExpiredUrlsService,
     CleanExpiredUrlsProcessor,
+
+    // Event Handlers
+    ClickCountIncreasedHandler,
 
     // Extra
     AppConfigService,

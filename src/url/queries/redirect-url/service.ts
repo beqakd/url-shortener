@@ -25,6 +25,8 @@ export class Service {
       await this.repository.findById(cmd.url),
     );
 
+    url.increaseClickCount();
+
     url.commit();
 
     return url.id;

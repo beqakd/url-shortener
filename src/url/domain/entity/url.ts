@@ -1,6 +1,9 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { NonFunctionProperties } from '../../../../libs/common/src';
-import { UrlShortenedEvent } from '../events/url.events';
+import {
+  ClickCountIncreasedEvent,
+  UrlShortenedEvent,
+} from '../events/url.events';
 
 export type UrlConstructor = Pick<
   NonFunctionProperties<Omit<Url, 'props'>>,
@@ -11,6 +14,8 @@ export class Url extends AggregateRoot {
   readonly id: string;
   readonly url: string;
   readonly expiresAt: number;
+  clicks: number;
+
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
@@ -27,6 +32,17 @@ export class Url extends AggregateRoot {
     // apply
     this.apply(
       new UrlShortenedEvent({
+        url: this,
+      }),
+    );
+  }
+
+  increaseClickCount(): void {
+    this.clicks++;
+
+    // apply
+    this.apply(
+      new ClickCountIncreasedEvent({
         url: this,
       }),
     );
