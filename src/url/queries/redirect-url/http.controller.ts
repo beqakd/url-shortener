@@ -1,10 +1,11 @@
 import { Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { urlRoot, urlRoutes } from '../../configs/app.route';
 import { RedirectUrl } from '.';
-import { UrlRepository } from '../../repository/url.repository';
 import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller(urlRoot)
+@ApiTags(urlRoot)
 export class HttpController {
   constructor(private readonly redirectUrlService: RedirectUrl.Service) {}
 

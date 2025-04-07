@@ -30,6 +30,12 @@ export class UrlRepository {
 
         return UrlMapper.toDomain(shortenedUrl);
       } catch (e) {
+        if (e.code === 'P2002') {
+          // and url unique failed that means long url is already shortened
+          if (e.meta.target[0] === 'url') {
+            return await this.findByUrl(url);
+          }
+        }
         if (tries > 5) {
           throw new UnableToCreateUrlError(`Unable to create url: ${e}`);
         }
@@ -48,6 +54,18 @@ export class UrlRepository {
     }
 
     return UrlMapper.toDomain(url);
+  }
+
+  async findByUrl(url: string): Promise<Url> {
+    const shortenedUrl = await this.prismaService.url.findUnique({
+      where: { url },
+    });
+
+    if (!shortenedUrl) {
+      throw new UrlNotFoundError(`Url with url ${url} not found`);
+    }
+
+    return UrlMapper.toDomain(shortenedUrl);
   }
 
   async deleteUrl(id: string) {

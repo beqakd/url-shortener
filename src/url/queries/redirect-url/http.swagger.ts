@@ -1,6 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { RedirectUrl } from '.';
 
 export function swaggerDocs() {
   return applyDecorators(

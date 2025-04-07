@@ -9,6 +9,7 @@ import { URL_QUEUE } from './application/queue/utils';
 import { CleanExpiredUrlsService } from './application/queue/clean-expired.service';
 import { CleanExpiredUrlsProcessor } from './application/queue/clean-expired.processor';
 import { ClickCountIncreasedHandler } from './application/event-handlers/click-count-increased.event-handler';
+import { RedirectUrl } from './queries/redirect-url';
 
 @Module({
   imports: [
@@ -21,10 +22,11 @@ import { ClickCountIncreasedHandler } from './application/event-handlers/click-c
       },
     }),
   ],
-  controllers: [CreateUrl.HttpController],
+  controllers: [CreateUrl.HttpController, RedirectUrl.HttpController],
   providers: [
     // Commands
     CreateUrl.Service,
+    RedirectUrl.Service,
 
     // Repositories
     UrlRepository,

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { PrismaModule } from 'nestjs-prisma';
-import { HealthController } from './app.controller';
+import { HealthController } from './health.controller';
 import { UrlModule } from './url/url.module';
 import { BullModule } from '@nestjs/bullmq';
 import { ConfigModule } from '@nestjs/config';

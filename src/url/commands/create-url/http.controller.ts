@@ -1,8 +1,10 @@
 import { Body, Controller, Headers, Param, Post } from '@nestjs/common';
 import { urlRoot, urlRoutes } from '../../configs/app.route';
 import { CreateUrl } from '.';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller(urlRoot)
+@ApiTags(urlRoot)
 export class HttpController {
   constructor(private readonly depositService: CreateUrl.Service) {}
 
