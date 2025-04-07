@@ -4,17 +4,18 @@ import { RedirectUrl } from '.';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 
-@Controller(urlRoot)
+@Controller()
 @ApiTags(urlRoot)
 export class HttpController {
   constructor(private readonly redirectUrlService: RedirectUrl.Service) {}
 
-  @Get(urlRoutes.get)
+  @Get(':url')
   @RedirectUrl.swaggerDocs()
-  async createWallet(
+  async redirectUrl(
     @Param() param: RedirectUrl.HttpBodyRequestDto,
     @Res() response: Response,
   ): Promise<RedirectUrl.HttpResponseDto> {
+    console.log("AQ var")
     const url = await this.redirectUrlService.execute(
       new RedirectUrl.Command({
         url: param.url,

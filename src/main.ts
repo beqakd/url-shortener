@@ -10,7 +10,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.setGlobalPrefix('url-shortener');
+  app.setGlobalPrefix('');
 
   const configBuilder = new DocumentBuilder()
     .setTitle('Url Shortener Swagger API')
