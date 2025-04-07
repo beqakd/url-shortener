@@ -4,4 +4,3 @@ export * from './events';
 export * from './seeders';
 export * from './dtos';
 export * from './typing';
-export * from './auth';

@@ -6,6 +6,7 @@ import {
 } from '../domain/errors/url.errors';
 import { Url } from '../domain/entity/url';
 import { Injectable } from '@nestjs/common';
+import { generateShortCode } from '../domain/utils';
 
 @Injectable()
 export class UrlRepository {
@@ -47,5 +48,19 @@ export class UrlRepository {
     }
 
     return UrlMapper.toDomain(url);
+  }
+
+  async deleteUrl(id: string) {
+    try {
+      await this.prismaService.url.delete({
+        where: { id },
+      });
+    } catch (e) {
+      if (e.code === 'P2025') {
+        throw new UrlNotFoundError(`Url with id ${id} not found`);
+      } else {
+        throw e;
+      }
+    }
   }
 }

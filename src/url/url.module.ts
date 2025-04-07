@@ -4,9 +4,22 @@ import { UrlHttpExceptionsFilter } from './exception-filters/exception-filters';
 import { AppConfigService } from './configs/app-config.service';
 import { UrlRepository } from './repository/url.repository';
 import { CreateUrl } from './commands/create-url';
+import { BullModule } from '@nestjs/bullmq';
+import { URL_QUEUE } from './application/queue/utils';
+import { CleanExpiredUrlsService } from './application/queue/clean-expired.service';
+import { CleanExpiredUrlsProcessor } from './application/queue/clean-expired.processor';
 
 @Module({
-  imports: [],
+  imports: [
+    // Register queue
+    BullModule.registerQueue({
+      name: URL_QUEUE,
+      defaultJobOptions: {
+        removeOnComplete: true,
+        removeOnFail: true,
+      },
+    }),
+  ],
   controllers: [CreateUrl.HttpController],
   providers: [
     // Commands
@@ -14,6 +27,10 @@ import { CreateUrl } from './commands/create-url';
 
     // Repositories
     UrlRepository,
+
+    // Queue
+    CleanExpiredUrlsService,
+    CleanExpiredUrlsProcessor,
 
     // Extra
     AppConfigService,
