@@ -7,7 +7,7 @@
     "push": true
   },
   "hooks": {
-    "before:init": ["yarn  format:check", "yarn lint:check"]
+    "before:init": ["yarn  format", "yarn lint:check"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
