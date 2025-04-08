@@ -25,17 +25,13 @@ export class Service {
 
     // split if its full domain
     const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    const code = cmd.url.includes(baseUrl)
-      ? cmd.url.split(baseUrl)[1]
-      : cmd.url;
+    const code = cmd.url.includes(baseUrl) ? cmd.url.split(baseUrl)[1] : cmd.url;
 
     if (!/^[A-Za-z0-9]{6,10}$/.test(code)) {
       throw new InvalidShortCode('Invalid short code format');
     }
 
-    const url = this.publisher.mergeObjectContext(
-      await this.repository.findById(code),
-    );
+    const url = this.publisher.mergeObjectContext(await this.repository.findById(code));
 
     url.increaseClickCount();
 

@@ -7,11 +7,9 @@ export const configuration = () => ({
 
 @Injectable()
 export class AppConfigService {
-  constructor(
-    private configService: ConfigService<typeof configuration, true>,
-  ) {}
+  constructor(private configService: ConfigService<typeof configuration, true>) {}
 
-  get stage() {
+  get stage(): string {
     return this.configService.getOrThrow('stage');
   }
 }

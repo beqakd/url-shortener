@@ -1,7 +1,4 @@
-export function getAttributeValue(
-  metaplexMetadata: MetaplexMetadata,
-  value: string,
-): string {
+export function getAttributeValue(metaplexMetadata: MetaplexMetadata, value: string): string {
   const trait = metaplexMetadata.attributes.find(
     (x) => x.trait_type.toLowerCase() === value.toLowerCase(),
   );

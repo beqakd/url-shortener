@@ -19,9 +19,7 @@ async function bootstrap() {
 
   if (process.env['SWAGGER_BASE_PATH'] !== undefined) {
     configBuilder.addServer(process.env['SWAGGER_BASE_PATH']);
-    console.log(
-      `[Swagger UI] Adding base path: ${process.env['SWAGGER_BASE_PATH']}`,
-    );
+    console.log(`[Swagger UI] Adding base path: ${process.env['SWAGGER_BASE_PATH']}`);
   }
   const config = configBuilder.build();
 
@@ -31,9 +29,7 @@ async function bootstrap() {
   });
 
   console.log('Server is running...');
-  console.log(
-    `[Swagger UI] http://localhost:${process.env.PORT ?? 3000}/url-shortener/docs`,
-  );
+  console.log(`[Swagger UI] http://localhost:${process.env.PORT ?? 3000}/url-shortener/docs`);
 
   await app.listen(process.env.PORT ?? 3000);
 }

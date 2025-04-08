@@ -1,4 +1,4 @@
-import { Body, Controller, Headers, Param, Post } from '@nestjs/common';
+import { Controller, Param, Post } from '@nestjs/common';
 import { urlRoot, urlRoutes } from '../../configs/app.route';
 import { CreateUrl } from '.';
 import { ApiTags } from '@nestjs/swagger';

@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { BaseCommand } from '../../../../libs/common/src';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Url } from '../../domain/entity/url';
 import { UrlRepository } from '../../repository/url.repository';
 
 export class Command extends BaseCommand<Command> {
@@ -22,9 +21,7 @@ export class Service {
   public async execute(cmd: Command): Promise<CommandOutput> {
     this.logger.debug(`Command: ${JSON.stringify(cmd)}`);
 
-    const url = this.publisher.mergeObjectContext(
-      await this.repository.createUrl(cmd.url),
-    );
+    const url = this.publisher.mergeObjectContext(await this.repository.createUrl(cmd.url));
 
     url.shortenUrl();
 

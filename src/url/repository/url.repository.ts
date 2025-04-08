@@ -1,9 +1,6 @@
 import { PrismaService } from 'nestjs-prisma';
 import { UrlMapper } from './url.mapper';
-import {
-  UnableToCreateUrlError,
-  UrlNotFoundError,
-} from '../domain/errors/url.errors';
+import { UnableToCreateUrlError, UrlNotFoundError } from '../domain/errors/url.errors';
 import { Url } from '../domain/entity/url';
 import { Injectable } from '@nestjs/common';
 import { generateShortCode } from '../domain/utils';
@@ -29,7 +26,7 @@ export class UrlRepository {
         });
 
         return UrlMapper.toDomain(shortenedUrl);
-      } catch (e) {
+      } catch (e: any) {
         if (e.code === 'P2002') {
           // and url unique failed that means long url is already shortened
           if (e.meta.target[0] === 'url') {

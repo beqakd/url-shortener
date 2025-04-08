@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Post, Res } from '@nestjs/common';
-import { urlRoot, urlRoutes } from '../../configs/app.route';
+import { Controller, Get, Param, Res } from '@nestjs/common';
+import { urlRoot } from '../../configs/app.route';
 import { RedirectUrl } from '.';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
@@ -15,7 +15,7 @@ export class HttpController {
     @Param() param: RedirectUrl.HttpBodyRequestDto,
     @Res() response: Response,
   ): Promise<RedirectUrl.HttpResponseDto> {
-    console.log("AQ var")
+    console.log('AQ var');
     const url = await this.redirectUrlService.execute(
       new RedirectUrl.Command({
         url: param.url,

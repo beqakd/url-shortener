@@ -8,16 +8,12 @@ import { UrlShortenedEvent } from 'src/url/domain/events/url.events';
 import { URL_QUEUE, UrlListenerQueue } from './utils';
 
 @EventsHandler(UrlShortenedEvent)
-export class CleanExpiredUrlsService
-  implements IEventHandler<UrlShortenedEvent>
-{
+export class CleanExpiredUrlsService implements IEventHandler<UrlShortenedEvent> {
   private readonly logger = new Logger(CleanExpiredUrlsService.name);
-  constructor(
-    @InjectQueue(URL_QUEUE) private readonly queue: UrlListenerQueue,
-  ) {}
+  constructor(@InjectQueue(URL_QUEUE) private readonly queue: UrlListenerQueue) {}
 
   async handle(event: UrlShortenedEvent) {
-    this.logger.log(`URL shortened event received: ${event.url}`);
+    this.logger.log(`URL shortened event received: ${event.url.id}`);
 
     // Add to Queue
     const job = await this.queue.add(

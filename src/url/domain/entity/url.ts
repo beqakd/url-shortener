@@ -1,9 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { NonFunctionProperties } from '../../../../libs/common/src';
-import {
-  ClickCountIncreasedEvent,
-  UrlShortenedEvent,
-} from '../events/url.events';
+import { ClickCountIncreasedEvent, UrlShortenedEvent } from '../events/url.events';
 
 export type UrlConstructor = Pick<
   NonFunctionProperties<Omit<Url, 'props'>>,

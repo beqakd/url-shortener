@@ -8,7 +8,7 @@ import {
   UrlNotFoundError,
 } from '../domain/errors/url.errors';
 
-const errors = [
+const _errors = [
   UrlNotFoundError,
   UrlAlreadyExistsError,
   UnableToCreateUrlError,
@@ -16,7 +16,7 @@ const errors = [
   InvalidShortCode,
 ];
 
-type ErrorTypes = (typeof errors)[number];
+type ErrorTypes = (typeof _errors)[number];
 
 export class UrlHttpExceptionsFilter extends BaseExceptionFilter {
   override catch(exception: ErrorTypes, host: ArgumentsHost) {

@@ -10,6 +10,5 @@ export class ModuleSeeder extends Seeder {
     super(faker, prisma, { isModule: true });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   async run(): Promise<void> {}
 }
