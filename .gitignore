@@ -54,3 +54,9 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Terraform state and secrets
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/.terraform/
+infra/terraform.tfvars
