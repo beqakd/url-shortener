@@ -83,7 +83,7 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = jsonencode([
     {
       name      = "url-shortener",
-      image     = "<your-ecr-repo-url>:latest",
+      image     = "901536124823.dkr.ecr.eu-central-1.amazonaws.com/serverless-defiland-rose-nft-develop:latest",
       essential = true,
       portMappings = [
         {
