@@ -1,3 +1,8 @@
+provider "aws" {
+  region  = var.aws_region
+  profile = "urlshortener-dev"
+}
+
 terraform {
   required_version = ">= 1.3.0"
 
@@ -8,9 +13,10 @@ terraform {
     }
   }
 
-  backend "local" {} # we can later switch to S3
-}
-
-provider "aws" {
-  region = var.aws_region
+  backend "s3" {
+    bucket  = "personal-terraform-state-35"
+    key     = "url-shortener/terraform.tfstate"
+    region  = "eu-central-1"
+    profile = "urlshortener-dev"
+  }
 }
